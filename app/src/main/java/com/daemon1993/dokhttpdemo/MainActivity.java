@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.daemon1993.dokhttp.params.DBaseParams;
 import com.daemon1993.dokhttp.params.DFormParams;
 import com.daemon1993.dokhttp.tools.DFileUtil;
 import com.daemon1993.dokhttp.DOkHttp;
@@ -278,12 +279,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         progressDialog.show();
 
 
-        Request request = new Request.Builder()
-                .tag(this)
-                .get()
+        DBaseParams dBaseParams=new DBaseParams() {
+            @Override
+            public DBaseParams returnThis() {
+                return this;
+            }
+        };
 
-                .url("http://7xnbj0.com1.z0.glb.clouddn.com/icon.jpg")
-
+        Request request = dBaseParams.setTag(this)
+                .setUrl("http://7xnbj0.com1.z0.glb.clouddn.com/icon.jpg")
                 .build();
 
 

@@ -28,10 +28,14 @@ public class DStreamParams extends DBaseParams<DStreamParams> {
         return this;
     }
 
+    /**
+     * 上传图片流
+     * @param file
+     */
     public void  setImageFile(final File file){
          requestBody = new RequestBody() {
             @Override public MediaType contentType() {
-                return DConstant.MEDIA_TYPE_MARKDOWN;
+                return DConstant.MEDIA_TYPE_PNG;
             }
 
             @Override public void writeTo(BufferedSink sink) throws IOException {
@@ -42,7 +46,11 @@ public class DStreamParams extends DBaseParams<DStreamParams> {
         builder.post(requestBody);
     }
 
-    public void setTextFile(final String str){
+    /**
+     * 上传文本字符串 作为流
+     * @param str
+     */
+    public void setText(final String str){
          requestBody = new RequestBody() {
             @Override public MediaType contentType() {
                 return DConstant.MEDIA_TYPE_MARKDOWN;
@@ -55,6 +63,22 @@ public class DStreamParams extends DBaseParams<DStreamParams> {
         builder.post(requestBody);
     }
 
+    /**
+     * 上传文本File 流上传
+     * @param file
+     */
+    public void setTextFile(final File file){
+        requestBody = new RequestBody() {
+            @Override public MediaType contentType() {
+                return DConstant.MEDIA_TYPE_MARKDOWN;
+            }
+
+            @Override public void writeTo(BufferedSink sink) throws IOException {
+                sink.writeAll(Okio.source(file));
+            }
+        };
+        builder.post(requestBody);
+    }
 
 
 

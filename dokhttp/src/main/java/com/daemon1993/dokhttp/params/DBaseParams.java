@@ -46,6 +46,5 @@ public abstract class DBaseParams<T extends DBaseParams> {
     }
 
 
-
     public abstract T returnThis();
 }
